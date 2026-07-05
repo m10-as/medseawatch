@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Environments
+.venv/
+venv/
+env/
+.env
+.env.*
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data and model artifacts
+data/raw/*
+data/interim/*
+data/processed/*
+models/*
+reports/figures/*
+
+# Keep folder placeholders
+!data/raw/.gitkeep
+!data/interim/.gitkeep
+!data/processed/.gitkeep
+!models/.gitkeep
+!reports/figures/.gitkeep
+
+# Local databases and outputs
+*.duckdb
+*.db
+*.sqlite
+*.parquet
+*.nc
+*.zarr/
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+!.vscode/settings.json
+

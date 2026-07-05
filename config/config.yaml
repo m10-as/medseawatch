@@ -1,0 +1,28 @@
+project:
+  name: medseawatch
+  title: "MedSeaWatch: Marine Risk & Anomaly Intelligence"
+
+region:
+  name: "Barcelona-Tarragona / Catalan Coast"
+  longitude_min: 0.5
+  longitude_max: 3.5
+  latitude_min: 40.0
+  latitude_max: 42.0
+
+data_sources:
+  copernicus_marine:
+    wave_product: "MEDSEA_ANALYSISFORECAST_WAV_006_017"
+    physics_product: "MEDSEA_ANALYSISFORECAST_PHY_006_013"
+    biogeochemistry_product: "MEDSEA_ANALYSISFORECAST_BGC_006_014"
+  puertos_del_estado:
+    status: "verify_access"
+  aemet:
+    status: "api_key_required"
+
+paths:
+  raw_data: "data/raw"
+  interim_data: "data/interim"
+  processed_data: "data/processed"
+  models: "models"
+  figures: "reports/figures"
+
