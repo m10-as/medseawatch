@@ -21,19 +21,42 @@ region:
       role: "Backup CMEMS nearshore reference point; not a verified buoy"
   validation_candidates:
     primary:
-      name: "Barcelona buoy area"
+      name: "Boya de Barcelona II"
       provider: "Puertos del Estado / Portus"
-      station_id: null
-      longitude: null
-      latitude: null
-      status: "verify_in_section_3"
+      station_id: 1731
+      longitude: 2.20
+      latitude: 41.32
+      depth_m: 68.0
+      cadence_minutes: 60
+      first_record: "2004-03-08 00:00:00.000"
+      variables:
+        - WAVE
+        - WATER_TEMP
+      status: "metadata_and_latest_wave_data_verified"
     backup:
-      name: "Tarragona buoy area"
+      name: "Boya de Tarragona"
       provider: "Puertos del Estado / Portus"
-      station_id: null
-      longitude: null
-      latitude: null
-      status: "verify_in_section_3"
+      station_id: 1712
+      longitude: 1.19
+      latitude: 41.07
+      depth_m: 15.0
+      cadence_minutes: 60
+      first_record: "1992-11-12 00:00:00.000"
+      variables:
+        - WAVE
+      status: "metadata_and_latest_wave_data_verified"
+    additional:
+      - name: "Boya de Tarragona offshore"
+        provider: "Puertos del Estado / Portus"
+        station_id: 2720
+        longitude: 1.47
+        latitude: 40.69
+        depth_m: 688.0
+        cadence_minutes: 60
+        first_record: "2004-08-20 14:00:00.000"
+        variables:
+          - WAVE
+        status: "metadata_and_latest_wave_data_verified"
 
 data_sources:
   copernicus_marine:
@@ -58,7 +81,14 @@ data_sources:
       biogeochemistry:
         - chl
   puertos_del_estado:
-    status: "verify_access"
+    api_base_url: "https://portus.puertos.es/portussvr/api"
+    wave_station_metadata_rt: "estaciones/rt/WAVE"
+    wave_station_metadata_hist: "estaciones/hist/WAVE"
+    station_variables: "estaciones/variables/{station_id}"
+    wave_parameters: "parametros/{station_id}"
+    latest_wave_data: "lastData/station/{station_id}"
+    historical_data_request: "solicitudDatos/registraSolicitud"
+    status: "metadata_latest_data_verified_historical_request_flow_identified"
   aemet:
     status: "api_key_required"
 

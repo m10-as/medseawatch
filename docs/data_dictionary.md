@@ -1,25 +1,24 @@
 # Data Dictionary
 
-Last updated: 2026-07-05
+Last updated: 2026-07-06
 
-This file records the confirmed Copernicus Marine variables selected during
-Section 1. The source of truth is the live `copernicusmarine describe` catalogue
-queried through `src/cmems_catalogue.py`.
+This file records the confirmed Copernicus Marine and Portus/Puertos del Estado
+variables selected during Sections 1-3.
 
 ## Region
 
 Project region: Barcelona-Tarragona / Catalan Coast.
 
-Initial bounding box from `config/config.yaml`:
+Version 1 bounding box from `config/config.yaml`:
 
 | Field | Value |
 |---|---:|
-| Minimum longitude | 0.5 |
-| Maximum longitude | 3.5 |
-| Minimum latitude | 40.0 |
-| Maximum latitude | 42.0 |
+| Minimum longitude | 0.75 |
+| Maximum longitude | 3.10 |
+| Minimum latitude | 40.45 |
+| Maximum latitude | 41.95 |
 
-This box will be refined in Section 2.
+CRS: `EPSG:4326`.
 
 ## Version 1 Essential Variables
 
@@ -38,6 +37,35 @@ This box will be refined in Section 2.
 | `uo` | Eastward sea water velocity | m s-1 | `MEDSEA_ANALYSISFORECAST_PHY_006_013` | `cmems_mod_med_phy-cur_anfc_4.2km-2D_PT1H-m` | Optional current feature/context |
 | `vo` | Northward sea water velocity | m s-1 | `MEDSEA_ANALYSISFORECAST_PHY_006_013` | `cmems_mod_med_phy-cur_anfc_4.2km-2D_PT1H-m` | Optional current feature/context |
 | `so` | Sea water salinity | 0.001 | `MEDSEA_ANALYSISFORECAST_PHY_006_013` | `cmems_mod_med_phy-sal_anfc_4.2km-2D_PT1H-m` | Optional ocean-state feature |
+
+## Portus / Puertos del Estado Buoy Variables
+
+These fields were verified from the public Portus API in Section 3. Portus
+returns raw values plus a `factor`; numeric values must be divided by `factor`
+before analysis.
+
+Primary station for V1 validation:
+
+```text
+1731 - Boya de Barcelona II
+```
+
+Backup stations:
+
+```text
+1712 - Boya de Tarragona
+2720 - Boya de Tarragona offshore
+```
+
+| Field | Portus `paramEseoo` | Meaning | Units | Role |
+|---|---|---|---:|---|
+| `hm0` | `Hm0` | Significant wave height | m | Ground-truth wave-height target |
+| `hmax` | `Hmax` | Maximum wave height | m | Extreme-wave context |
+| `tp` | `Tp` | Peak period | s | Ground-truth wave-period feature |
+| `tm02` | `Tm02` | Mean period Tm02 | s | Secondary wave-period feature |
+| `dmd` | `MeanDir` | Mean wave direction of provenance | degree | Ground-truth wave-direction feature |
+| `lat` | `Latitude` | Station latitude | degree | Station metadata/check |
+| `lon` | `Longitude` | Station longitude | degree | Station metadata/check |
 
 ## Optional Later Variables
 
@@ -63,8 +91,19 @@ This box will be refined in Section 2.
 - Do not include nutrient, oxygen, carbonate, or pH variables in V1 unless they
   become necessary after EDA.
 
+## Section 3 Decisions
+
+- Use CMEMS programmatic subsetting for gridded wave, physics, and
+  biogeochemistry data.
+- Use Portus public endpoints for station metadata, wave parameter metadata, and
+  latest observations.
+- Use `1731 - Boya de Barcelona II` as the primary V1 validation station.
+- Treat long historical buoy-observation export as a follow-up ingestion
+  verification task; the Portus app exposes a request/cart flow rather than a
+  confirmed direct historical download endpoint.
+
 ## Still To Verify
 
-- Puertos del Estado buoy data access and exact buoy variable names.
+- Direct or documented export path for long historical buoy observations.
 - Whether V1 training should use a multi-year/reanalysis product in addition to
   analysis-forecast products for longer historical coverage.
