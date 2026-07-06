@@ -1,0 +1,53 @@
+{
+  "type": "FeatureCollection",
+  "name": "medseawatch_region_v1",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "EPSG:4326"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Barcelona-Tarragona CMEMS subset box",
+        "purpose": "V1 marine data subset boundary"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [0.75, 40.45],
+            [3.10, 40.45],
+            [3.10, 41.95],
+            [0.75, 41.95],
+            [0.75, 40.45]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Barcelona nearshore reference point",
+        "role": "Initial CMEMS extraction reference point; not a verified buoy"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.25, 41.30]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Tarragona nearshore reference point",
+        "role": "Backup CMEMS extraction reference point; not a verified buoy"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1.35, 41.05]
+      }
+    }
+  ]
+}

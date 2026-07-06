@@ -4,10 +4,36 @@ project:
 
 region:
   name: "Barcelona-Tarragona / Catalan Coast"
-  longitude_min: 0.5
-  longitude_max: 3.5
-  latitude_min: 40.0
-  latitude_max: 42.0
+  crs: "EPSG:4326"
+  longitude_min: 0.75
+  longitude_max: 3.10
+  latitude_min: 40.45
+  latitude_max: 41.95
+  purpose: "CMEMS subset box for V1 discovery and ingestion"
+  reference_points:
+    barcelona_nearshore:
+      longitude: 2.25
+      latitude: 41.30
+      role: "Initial CMEMS nearshore reference point; not a verified buoy"
+    tarragona_nearshore:
+      longitude: 1.35
+      latitude: 41.05
+      role: "Backup CMEMS nearshore reference point; not a verified buoy"
+  validation_candidates:
+    primary:
+      name: "Barcelona buoy area"
+      provider: "Puertos del Estado / Portus"
+      station_id: null
+      longitude: null
+      latitude: null
+      status: "verify_in_section_3"
+    backup:
+      name: "Tarragona buoy area"
+      provider: "Puertos del Estado / Portus"
+      station_id: null
+      longitude: null
+      latitude: null
+      status: "verify_in_section_3"
 
 data_sources:
   copernicus_marine:
